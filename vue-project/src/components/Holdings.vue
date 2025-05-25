@@ -1,16 +1,20 @@
 <template>
-  <h1 class="heading">Get your Holdings</h1>
+  <h1 class="main-heading">Get your Holdings</h1>
 
   <div class="container-wrapper">
     <div class="holdings" v-if="store.loggedIn">
       <h2 class="heading">Portfolio - Holdings</h2>
-      <div v-for="holding in holdings.data">
-        <div class="stock-card">
-          <p class="stock-name">{{ holding.tradingsymbol }}</p>
+      <div v-for="holding in holdings.data" class="holding-wrapper">
+        <div class="stock-card" @click="getStockNews(holding)">
+          <div class="stock-details">
+            <p class="stock-name">{{ holding.tradingsymbol }}</p>
+            <p>{{ holding.exchange }}</p>
+          </div>
           <div class="stock-details">
             <div class="stock-details-1">
-              <p>Exchange: {{ holding.exchange }}</p>
-              <p>Quantity: {{ holding.average_price }}</p>
+              <p>QTY: {{ holding.quantity }}</p>
+              <p>Avg. Price: {{ holding.average_price }}</p>
+              <p class="last-price">LTP: {{ holding.last_price }}</p>
             </div>
             <div class="stock-details-2">
               <p>P&L: {{ holding.pnl.toFixed(2) }}</p>
@@ -24,7 +28,21 @@
     </div>
 
     <div class="stock-data">
-      <h2>More Info...</h2>
+      <h2>Market News</h2>
+      <div class="news-container" v-if="news.length>0">
+        <div class="news-card" v-for="nCard in news">
+          <div class="news-card-details">
+            <img :src="nCard.thumbnail" alt="News" class="news-thumbnail">
+          </div>
+          <div class="news-card-details news-content">
+            <p>{{ nCard.title }}</p>
+            <p>Date: {{ nCard.date.split(",")[0] }}</p>
+            <a :href="nCard.link" target="_blank">Know More...</a>
+            <a class="news-source">Source: {{ nCard.source.name }}</a>
+            <!-- <p>{{ nCard }}</p> -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,28 +55,40 @@ import axiosRequest from '../../axios_api'
 
 const store = useStore()
 const holdings = ref([])
+const news = ref([])
 console.log(store.loggedIn)
 
 onMounted(async () => {
   if (store.loggedIn) {
     const response = await axiosRequest.get('/holdings')
     holdings.value = response.data.holdings
-    console.log(holdings.value)
+    console.log(holdings.value);
   }
 
-//   let sampleStock = holdings.value[0].tradingsymbol;
-//   const response = await axiosRequest.get("/stock_news", {params: {stock: sampleStock}})
-//   console.log(response.data);
-
-
 })
+
+
+async function getStockNews(holding){
+  console.log(holding.tradingsymbol);
+  let stock = holding.tradingsymbol;
+  const newsResponse = await axiosRequest.get("/stock_news", {params: {"stock": stock}});
+  // console.log(newsResponse.data);
+  news.value = newsResponse.data.News.slice(0,50);
+}
+
+
 </script>
 
 
 <style scoped>
+.main-heading{
+  text-align: center;
+}
+
 .container-wrapper{
     display: flex;
     flex-direction: row;
+    height: calc(100vh - 2em);
     width: 100%;
     gap: 1rem;
     padding: 1rem;
@@ -71,10 +101,12 @@ onMounted(async () => {
   align-items: flex-start;
   padding-left: 1rem;
   width: 50%;
+  overflow-y: auto;
 }
 
 .stock-data{
     width: 50%;
+    overflow-y: auto;
 }
 
 .stock-card {
@@ -82,6 +114,20 @@ onMounted(async () => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 2em;
+  border: 2px solid red;
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+.stock-card:hover{
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-5px);
+}
+
+.holding-wrapper{
+  width: 100%;;
 }
 
 .stock-details {
@@ -89,6 +135,7 @@ onMounted(async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: left;
 }
 
 .stock-details-1,
@@ -97,5 +144,44 @@ onMounted(async () => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1.5em;
+}
+
+.stock-name{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.last-price{
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.news-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  border: 2px solid red;
+  padding: 1em;
+  gap: 1em;
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+.news-card:hover{
+  cursor: pointer;
+}
+
+.news-thumbnail{
+  height: 100px;
+  width: 100px;
+}
+
+.news-source{
+  text-align: right;
+  margin-top: auto;
+  align-self: flex-end;
+  margin-left: 2em;
 }
 </style>

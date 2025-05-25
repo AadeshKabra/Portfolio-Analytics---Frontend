@@ -5,7 +5,7 @@
 
         <div class="login-container" v-if="!isLoggedIn">
             <label>Zerodha Client Id </label>
-            <input type="text" class="clientId" id="clientId">
+            <input type="text" class="clientId" id="clientId" placeholder="AC4938">
 
             <button class="login-button" @click="login" id="login-button">Login</button>
         </div>
