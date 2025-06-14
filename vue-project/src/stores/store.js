@@ -14,5 +14,7 @@ export const useStore = defineStore("user", {
     getters: {
         welcomeMessage: (state) => `Welcome, ${state.name}`
     },
-    persist: true
+    persist: {
+        storage: sessionStorage
+    }
 })

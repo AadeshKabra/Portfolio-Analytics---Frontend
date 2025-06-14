@@ -7,6 +7,11 @@
         <div class="navbar-options holdings">
             <router-link to="/holdings" class="nav-holdings navbar-route">Holdings</router-link>
         </div>
+
+        <div class="navbar-options analyse">
+            <router-link to="/analyse" class="nav-analyse navbar-route">Analyse</router-link>
+        </div>
+
     </div>
 </template>
 

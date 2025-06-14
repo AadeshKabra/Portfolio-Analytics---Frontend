@@ -65,7 +65,7 @@ onMounted(async () => {
     console.log(holdings.value);
   }
 
-})
+});
 
 
 async function getStockNews(holding){
