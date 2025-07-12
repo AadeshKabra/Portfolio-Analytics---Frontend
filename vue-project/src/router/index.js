@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Holdings from '@/components/Holdings.vue'
 import Home from '../components/Home.vue'
 import Analyse from '@/components/Analyse.vue'
+import Chat from '@/components/Chat.vue'
 
 
 const router = createRouter({
@@ -26,6 +27,11 @@ const router = createRouter({
       path: "/analyse",
       name: "analyse",
       component: Analyse,
+    },
+    {
+      path: "/chat",
+      name: "chat",
+      component: Chat
     }
   ],
 })

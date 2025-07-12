@@ -1,7 +1,7 @@
 <template>
   <div class="profile-form">
 
-        <h1 id="login-heading">Your Personalized Zerodha Dashboard!</h1>
+        <h1 id="login-heading">Your Personalized Zerodha Dashboard</h1>
 
         <div class="login-container" v-if="!isLoggedIn">
             <label>Zerodha Client Id </label>

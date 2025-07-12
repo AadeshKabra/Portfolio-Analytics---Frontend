@@ -12,6 +12,10 @@
             <router-link to="/analyse" class="nav-analyse navbar-route">Analyse</router-link>
         </div>
 
+        <div class="navbar-options chat">
+            <router-link to="/chat" class="nav-chat navbar-route">Chat</router-link>
+        </div>
+
     </div>
 </template>
 
