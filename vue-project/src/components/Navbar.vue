@@ -16,6 +16,10 @@
             <router-link to="/chat" class="nav-chat navbar-route">Chat</router-link>
         </div>
 
+        <div class="navbar-options research">
+            <router-link to="/research" class="nav-chat navbar-route">Research</router-link>
+        </div>
+
     </div>
 </template>
 
@@ -31,15 +35,22 @@
         flex-direction: row;
         justify-content: left;
         align-items: center;
+        background-color: #00809D;
+        border-radius: 10px;
     }
 
     .navbar-route{
         text-decoration: none;
-        color: #000000;
+        color: #FFFFFF;
     }
 
     .navbar-options{
         margin-left: 1em;
         margin-right: 1em;
     }
+    /* .navbar-options:hover{
+        cursor: pointer;
+        background-color: #FCF8DD;
+        color: #00809D;
+    } */
 </style>

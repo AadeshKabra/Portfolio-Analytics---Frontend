@@ -5,7 +5,7 @@
         </div>
     </div>
     
-    <div>
+    <div v-else>
         <h2 class="heading">Chat</h2>
         <div class="chat-container">
             <div class="chat-box">

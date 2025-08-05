@@ -1,5 +1,5 @@
 <template>
-  <h1 class="main-heading">Get your Holdings</h1>
+  <h1 class="main-heading">Holdings</h1>
 
   <div class="container-wrapper">
     <div class="holdings" v-if="store.loggedIn">
@@ -14,10 +14,11 @@
             <div class="stock-details-1">
               <p>QTY: {{ holding.quantity }}</p>
               <p>Avg. Price: {{ holding.average_price }}</p>
-              <p class="last-price">LTP: {{ holding.last_price }}</p>
+              <p class="profit-loss">P&L: {{ holding.pnl.toFixed(2) }}</p>
+              
             </div>
             <div class="stock-details-2">
-              <p>P&L: {{ holding.pnl.toFixed(2) }}</p>
+              <p class="last-price">LTP: {{ holding.last_price }}</p>
               <p>Daily Change: {{ holding.day_change.toFixed(2) }}</p>
               <p>Daily Change % : {{ holding.day_change_percentage.toFixed(2) }}</p>
             </div>
@@ -115,9 +116,12 @@ async function getStockNews(holding){
   justify-content: center;
   align-items: center;
   gap: 2em;
-  border: 2px solid red;
+  border: 2px solid #FFD700;
   border-radius: 10px;
   margin-top: 1em;
+  background-color: white;
+  color: #000000;
+  
 }
 
 .stock-card:hover{
@@ -152,7 +156,7 @@ async function getStockNews(holding){
   font-size: 1.2em;
 }
 
-.last-price{
+.profit-loss{
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -162,11 +166,13 @@ async function getStockNews(holding){
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  border: 2px solid red;
+  border: 2px solid #FFD700;
   padding: 1em;
   gap: 1em;
   border-radius: 10px;
   margin-top: 1em;
+  background-color: white;
+  color: #000000;
 }
 
 .news-card:hover{

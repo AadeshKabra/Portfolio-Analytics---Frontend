@@ -3,6 +3,7 @@ import Holdings from '@/components/Holdings.vue'
 import Home from '../components/Home.vue'
 import Analyse from '@/components/Analyse.vue'
 import Chat from '@/components/Chat.vue'
+import Research from '@/components/Research.vue'
 
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/chat",
       name: "chat",
       component: Chat
+    },
+    {
+      path: "/research",
+      name: "research",
+      component: Research
     }
   ],
 })
